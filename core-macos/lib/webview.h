@@ -301,7 +301,9 @@ WEBVIEW_API int webview_init(struct webview *w) {
   w->priv.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title(GTK_WINDOW(w->priv.window), w->title);
 
-  if (w->resizable) {
+  if (w->fullscreen) {
+    gtk_window_fullscreen(GTK_WINDOW(w->priv.window));
+  } elseif (w->resizable) {
     gtk_window_set_default_size(GTK_WINDOW(w->priv.window), w->width,
                                 w->height);
   } else {
