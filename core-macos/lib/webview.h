@@ -185,6 +185,7 @@ WEBVIEW_API int webview(const char *title, const char *url, int width,
   webview.height = height;
   webview.resizable = resizable;
   int r = webview_init(&webview);
+  webview_set_fullscreen(&webview, 1);
   if (r != 0) {
     return r;
   }
@@ -301,18 +302,9 @@ WEBVIEW_API int webview_init(struct webview *w) {
   w->priv.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title(GTK_WINDOW(w->priv.window), w->title);
 
-  /*
-  if (w->fullscreen) {
-    gtk_window_fullscreen(GTK_WINDOW(w->priv.window));
-  } 
-  */
   if (w->resizable) {
-
-    gtk_window_fullscreen(GTK_WINDOW(w->priv.window));
-    /*
     gtk_window_set_default_size(GTK_WINDOW(w->priv.window), w->width,
                                 w->height);
-    */
   } else {
     gtk_widget_set_size_request(w->priv.window, w->width, w->height);
   }
